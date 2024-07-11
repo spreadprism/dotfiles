@@ -1,0 +1,16 @@
+lastupdatecheck: 0
+recentrepos:
+    - /home/avalon/.dotfiles
+    - /home/avalon/Projects/aiops_demo
+    - /home/avalon/windows_home/ObsidianVaults/Personal
+    - /home/avalon/.shell
+startuppopupversion: 5
+lastversion: 0.42.0
+customcommandshistory: []
+hidecommandlog: false
+ignorewhitespaceindiffview: false
+diffcontextsize: 3
+localbranchsortorder: recency
+remotebranchsortorder: alphabetical
+gitlogorder: topo-order
+gitlogshowgraph: always
