@@ -1,0 +1,12 @@
+#! /bin/sh
+
+class=$1
+workspace=$2
+executable=$3
+
+if $(hyprctl clients -j | grep -q "\"class\": \"$class\""); then
+  hyprctl dispatch togglespecialworkspace $workspace
+else
+  hyprctl dispatch exec $executable
+  hyprctl dispatch togglespecialworkspace $workspace
+fi

@@ -1,9 +1,0 @@
-.bookmark-bar button span {
-    font-size: 14px;
-    font-family: 'JetBrainsMono Nerd Font';
-    color: #f7768e;
-}
-.bookmark-bar button .separator {
-  border-left: 1px solid #f7768e !important;
-  height: 18px !important;
-}

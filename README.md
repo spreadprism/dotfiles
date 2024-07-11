@@ -1,6 +1,0 @@
-# dotfiles
-
-## Sync dotfiles
-```
-make
-```

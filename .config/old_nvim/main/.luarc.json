@@ -1,8 +1,0 @@
-{
-  "diagnostics.globals": ["vim", "MiniFiles", "lfs"],
-  "workspace.library": [
-    "/home/avalon/.local/share/nvim/lazy/neoconf.nvim/types",
-    "/home/avalon/.local/share/nvim/lazy/neoconf.nvim/types/lua",
-    "${3rd}/lfs/library"
-  ]
-}

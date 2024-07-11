@@ -1,8 +1,0 @@
-{
-    "diagnostics.globals": [
-        "vim",
-        "MiniFiles",
-        "keybind",
-        "keybind_group"
-    ]
-}

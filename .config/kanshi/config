@@ -1,9 +1,0 @@
-profile bureau {
-  output "eDP-1" disable
-  output "Dell Inc. DELL S2721HN 2NGQSJ3" mode 1920x1080@60Hz position 0,0
-  output "Dell Inc. DELL S2721HN 9RT0X83" mode 1920x1080@60Hz position 1920,0
-  output "Dell Inc. DELL S2721HN 6RT0X83" mode 1920x1080@60Hz position 3840,0
-}
-profile undocked {
-  output "eDP-1" enable mode 1920x1200 position 0,0 scale 1
-}
