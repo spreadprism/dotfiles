@@ -104,6 +104,7 @@ if command -v go &> /dev/null
 then
   export GOPATH="$HOME/.go"
   export GOBIN="$GOPATH/bin"
+  export PATH="$PATH:$GOBIN"
 fi
 # ------------------------------------------------------------
 if command -v cargo &> /dev/null
@@ -131,7 +132,6 @@ zinit ice depth=1
 zinit light jeffreytse/zsh-vi-mode
 # ------------------------------------------------------------
 export FZF\_DEFAULT\_OPTS='--bind=shift-tab:up,tab:down'
-zinit ice wait lucid
 zinit light zsh-users/zsh-autosuggestions
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd completion)
 # ------------------------------------------------------------
@@ -253,7 +253,7 @@ function zvm_after_lazy_keybindings() {
 }
 function zvm_after_init() {
   # INFO: These keybindings are set for insert mode
-  bindkey '<M-a>' autosuggest-execute
+  bindkey '^A' autosuggest-execute
   bindkey '^O' previous_dir
   bindkey '^P' next_dir
 }
@@ -268,9 +268,9 @@ init_conda() {
       eval "$__conda_setup"
   else
       if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
-          . "$HOME/miniconda3/etc/profile.d/conda.sh"
+        . "$HOME/miniconda3/etc/profile.d/conda.sh"  # commented out by conda initialize
       else
-          export PATH="$HOME/miniconda3/bin:$PATH"
+        export PATH="$HOME/miniconda3/bin:$PATH"  # commented out by conda initialize
       fi
   fi
   unset __conda_setup

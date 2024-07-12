@@ -5,7 +5,7 @@
   // "width": 1280, // Waybar width
   "spacing": 4, // Gaps between modules (4px)
   // Choose the order of the modules
-  "modules-left": ["cpu","memory", "custom/temperature", "tray"],
+  "modules-left": ["cpu","memory", "tray"],
   "modules-center": ["hyprland/workspaces"],
   // "modules-right": ["pulseaudio", "network", "battery", "clock"],
   "modules-right": ["pulseaudio", "battery", "clock","custom/logo"],
@@ -74,11 +74,11 @@
     "format": "{}",
     "exec": "echo 󰣇"
   },
-  "custom/temperature": {
-    "format": "{} ",
-    "interval": 1,
-    "exec": "sensors | awk '/^CPU:/ {sub(/\\+/,\"\",$2); print $2}'"
-  },
+  // "custom/temperature": {
+  //   "format": "{} ",
+  //   "interval": 1,
+  //   "exec": "sensors | awk '/^CPU:/ {sub(/\\+/,\"\",$2); print $2}'"
+  // },
   "tray": {
     "spacing": 2
   }

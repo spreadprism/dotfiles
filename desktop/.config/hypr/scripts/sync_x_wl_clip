@@ -1,0 +1,12 @@
+#! /bin/sh
+
+prev_clip=$(xclip -o)
+while true; do
+  current_clip=$(xclip -o)
+  if [ "$current_clip" != "$prev_clip" ]; then
+    prev_clip="$current_clip"
+    echo "$current_clip" | wl-copy
+  fi
+
+  sleep 0.1
+done

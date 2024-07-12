@@ -4,6 +4,8 @@ local act = wezterm.action
 local config = {}
 
 config.window_close_confirmation = "NeverPrompt"
+config.warn_about_missing_glyphs = false
+config.enable_kitty_graphics = true
 
 -- # Appearance
 config.color_scheme = "Tokyo Night Storm"
