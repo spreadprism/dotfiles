@@ -1,0 +1,105 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: JetBrainsMono Nerd Font, otf-font-awesome, monospace;
+    font-size: 14px;
+}
+
+window#waybar {
+    background-color: transparent;
+    /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
+    margin: 2px 0;
+    color: #ffffff;
+    /* transition-property: background-color; */
+    /* transition-duration: .5s; */
+}
+
+#workspaces {
+    margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: #ffffff;
+}
+
+#workspaces button:hover {
+    background-color: rgba(122, 162, 247, 0.5);
+    color: #000000;
+}
+
+#workspaces button.active {
+    background-color: rgba(122, 162, 247, 1);
+    color: #000000;
+}
+
+/* #workspaces button.urgent { */
+/*     color: #eb4d4b; */
+/* } */
+
+.modules-center,
+.modules-left,
+.modules-right {
+    background-color: rgba(43, 48, 59, 0.5);
+    border-radius: 10;
+}
+
+
+#tray {
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0 10px 0 10px;
+}
+
+#cpu {
+  padding: 0 10px 0 15px;
+}
+
+#memory,
+#custom-temperature {
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0 10px;
+}
+
+#memory {
+  padding: 0 10px 0 15px;
+}
+
+#custom-logo {
+  padding: 0 20px 0 10px;
+  font-size: 30px;
+  color: rgba(122, 162, 247, 1);
+}
+
+#battery,
+#network,
+#clock,
+#pulseaudio {
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0 10px;
+  background-color: transparent;
+}
+
+
+#battery.charging, #battery.plugged {
+    background-color: transparent;
+    color: #26A65B;
+}
+
+#battery.warning:not(.charging) {
+  background-color: transparent;
+  color: #f5a742;
+}
+#battery.critical:not(.charging) {
+  background-color: transparent;
+    color: #f53c3c;
+}
