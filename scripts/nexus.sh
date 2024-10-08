@@ -2,7 +2,6 @@
 
 GIT_URL="https://github.com/spreadprism/dotfiles"
 DOTFILE_DIR="$HOME/.dotfiles"
-BOOTSTRAP_DIR="$HOME/boot-tmp"
 
 NEXUS_PLATFORM="" # INFO: Linux, MacOS, WSL
 
@@ -148,10 +147,6 @@ if $USE_ZSH; then
   stow zsh
   _nexus_add zsh
   _nexus_install
-  rm -rf $BOOTSTRAP_DIR
-  exec $(which zsh)
 else
   stow bash
-  rm -rf $BOOTSTRAP_DIR
-  exec $(which bash)
 fi

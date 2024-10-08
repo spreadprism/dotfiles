@@ -17,47 +17,47 @@ if [ ! -f $EGET_PATH ]; then
 fi
 # ------------------------------------------------------------
 if ! command -v starship &> /dev/null; then
-  eget starship/starship --to=~/bin -a="starship-x86_64-unknown-linux-gnu.tar.gz"
+  eget starship/starship --to=$BIN_DIR -a="starship-x86_64-unknown-linux-gnu.tar.gz"
 fi
 # ------------------------------------------------------------
 if ! command -v bob &> /dev/null; then
-  eget MordechaiHadad/bob --to=~/bin -a="bob-linux-x86_64.zip"
+  eget MordechaiHadad/bob --to=$BIN_DIR -a="bob-linux-x86_64.zip"
 fi
 # ------------------------------------------------------------
 if ! command -v rg &> /dev/null; then
-  eget BurntSushi/ripgrep --to=~/bin
+  eget BurntSushi/ripgrep --to=$BIN_DIR
 fi
 # ------------------------------------------------------------
 if ! command -v fzf &> /dev/null; then
-  eget junegunn/fzf --to=~/bin
+  eget junegunn/fzf --to=$BIN_DIR
 fi
 # ------------------------------------------------------------
 if ! command -v jq &> /dev/null; then
-  eget jqlang/jq --to=~/bin -a="jq-linux64"
+  eget jqlang/jq --to=$BIN_DIR -a="jq-linux64"
 fi
 # ------------------------------------------------------------
 if ! command -v jqp &> /dev/null; then
-  eget noahgorstein/jqp --to=~/bin
+  eget noahgorstein/jqp --to=$BIN_DIR
 fi
 # ------------------------------------------------------------
 if ! command -v bat &> /dev/null; then
-  eget sharkdp/bat --to=~/bin -a="bat-v0.24.0-x86_64-unknown-linux-gnu.tar.gz"
+  eget sharkdp/bat --to=$BIN_DIR -a="bat-v0.24.0-x86_64-unknown-linux-gnu.tar.gz"
 fi
 # ------------------------------------------------------------
 if ! command -v eza &> /dev/null; then
-  eget eza-community/eza --to=~/bin -a="eza_x86_64-unknown-linux-gnu.tar.gz"
+  eget eza-community/eza --to=$BIN_DIR -a="eza_x86_64-unknown-linux-gnu.tar.gz"
 fi
 # ------------------------------------------------------------
 if ! command -v lazygit &> /dev/null; then
-  eget jesseduffield/lazygit --to=~/bin
+  eget jesseduffield/lazygit --to=$BIN_DIR
 fi
 # ------------------------------------------------------------
 if ! command -v zoxide &> /dev/null; then
-  eget ajeetdsouza/zoxide --to=~/bin
+  eget ajeetdsouza/zoxide --to=$BIN_DIR
 fi
 
 if ! command -v direnv &> /dev/null; then
-  eget direnv/direnv --to=~/bin
+  eget direnv/direnv --to=$BIN_DIR
 fi
 # ------------------------------------------------------------
 # INFO: Zinit
