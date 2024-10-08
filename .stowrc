@@ -2,3 +2,4 @@
 --dir=profiles
 --dotfiles
 --adopt
+--ignore=profiles/base/dot-bin/.gitignore

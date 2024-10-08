@@ -33,15 +33,11 @@ stow base
 stow shell
 
 USE_ZSH=false
-USE_BASH=false
 
 for arg in "$@"; do
   case $arg in
     --zsh)
       USE_ZSH=true
-      ;;
-    --bash)
-      USE_BASH=true
       ;;
   esac
 done

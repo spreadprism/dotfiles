@@ -2,16 +2,11 @@
 
 
 ## bootstrap
-### Zsh (Global)
+### Bash
 ```sh
-curl -sS https://raw.githubusercontent.com/spreadprism/dotfiles/main/bootstrap.sh | sh - --zsh
+curl -sS https://raw.githubusercontent.com/spreadprism/dotfiles/main/bootstrap.sh | bash
 ```
-### Zsh (Local)
+### Zsh
 ```sh
-curl -sS https://raw.githubusercontent.com/spreadprism/dotfiles/main/bootstrap.sh | sh - --zsh --local
-```
-
-Link bash configs
-```sh
-curl -sS https://raw.githubusercontent.com/spreadprism/dotfiles/main/bootstrap.sh | sh - --bash
+curl -sS https://raw.githubusercontent.com/spreadprism/dotfiles/main/bootstrap.sh | bash -s -- --zsh
 ```
