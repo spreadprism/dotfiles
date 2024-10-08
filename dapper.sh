@@ -13,11 +13,17 @@ _DISTRO_DEBIAN="debian"
 _DISTRO_RHEL="rhel"
 
 _PLATFORM=$(uname -sr)
-_DEPENDENCIES=""
+_DEPENDENCIES_PM=""
+_DEPENDENCIES_LOCAL=""
+_DAPPER_BIN_DIR="$HOME/.bin"
+export PATH="$PATH:$_DAPPER_BIN_DIR"
 
 case "${_PLATFORM}" in
   Darwin*)
     _PLATFORM=$_PLATFORM_MACOS
+    # TODO: Support macos, if need be
+    echo "${_PLATFORM} is not supported"
+    exit 1
     ;;
   Linux*Microsoft*)
     _PLATFORM=$_PLATFORM_WSL
@@ -35,7 +41,7 @@ if [ "$_PLATFORM" = "$_PLATFORM_LINUX" ] || [ "$_PLATFORM" = "$_PLATFORM_WSL" ];
   _DISTRO=$(cat /etc/*-release | grep -i '^ID=' | cut -d'=' -f2)
 fi
 
-dapper_add () {
+dapper_add() {
   DEPENDENCY="$1"
   CMD="$1"
   shift
@@ -52,32 +58,61 @@ dapper_add () {
   done
 
   if ! command -v "$CMD" &> /dev/null; then
-    echo "adding $DEPENDENCY"
-    if [ -z "$_DEPENDENCIES" ]; then
-      _DEPENDENCIES="$DEPENDENCY"
+    if [ -z "$_DEPENDENCIES_PM" ]; then
+      _DEPENDENCIES_PM="$DEPENDENCY"
     else
-      _DEPENDENCIES="$_DEPENDENCIES $DEPENDENCY"
+      _DEPENDENCIES_PM="$_DEPENDENCIES_PM $DEPENDENCY"
     fi
   fi
 }
+# dapper_add_git() {
+#
+# }
 
-dapper_install () {
+dapper_add_install() {
+  dapper_add $@
+  dapper_install
+}
 
-  if [ ! -z $_DEPENDENCIES ]; then
+dapper_install() {
+  _dapper_install_pm
+  _dapper_install_git
+}
+
+_dapper_install_pm() {
+  if [ ! -z $_DEPENDENCIES_PM ]; then
     case $_DISTRO in
       $_DISTRO_ARCH)
-        sudo pacman -S --noconfirm --needed $_DEPENDENCIES
+        sudo pacman -S --noconfirm --needed $_DEPENDENCIES_PM
         ;;
       $_DISTRO_DEBIAN|$_DISTRO_UBUNTU)
-        sudo apt-get install -y $_DEPENDENCIES
+        sudo apt-get install -y $_DEPENDENCIES_PM
         ;;
       $_DISTRO_RHEL)
-        sudo dnf install -y $_DEPENDENCIES
+        sudo dnf install -y $_DEPENDENCIES_PM
         ;;
       *)
         echo "$_DISTRO is not a supported"
         exit 1
     esac
-    _DEPENDENCIES=""
+    _DEPENDENCIES_PM=""
+  fi
+}
+
+_dapper_install_git() {
+  if [ ! -z $_DEPENDENCIES_PM ]; then
+    _dapper_ensure_eget_installed
+
+    # TODO: Install logic
+  fi
+}
+
+_dapper_ensure_eget_installed() {
+  EGET_PATH=$_DAPPER_BIN_DIR/eget
+  if [ ! -f $EGET_PATH ]; then
+    LAST_PWD=$PWD
+    cd $BIN_DIR
+    curl -sS https://zyedidia.github.io/eget.sh | sh
+    cd $LAST_PWD
   fi
 }

@@ -2,15 +2,19 @@
 
 GIT_URL="https://github.com/spreadprism/dotfiles"
 DOTFILE_DIR="$HOME/.dotfiles"
+BOOTSTRAP_DIR="$HOME/boot-tmp"
 
 source_util () {
   if [ -d $DOTFILE_DIR ]; then
     source $DOTFILE_DIR/$1
   else
-    source <(curl -s https://raw.githubusercontent.com/spreadprism/dotfiles/main/$1)
+    curl -s -o $BOOTSTRAP_DIR/script.sh https://raw.githubusercontent.com/spreadprism/dotfiles/main/$1
+    chmod +x $BOOTSTRAP_DIR/script.sh
+    source $BOOTSTRAP_DIR/script.sh
   fi
 }
 
+echo "Bootstrap"
 
 source_util dapper.sh
 
@@ -25,4 +29,28 @@ fi
 
 cd $DOTFILE_DIR
 
-stow shell --adopt
+stow base
+stow shell
+
+USE_ZSH=false
+USE_BASH=false
+
+for arg in "$@"; do
+  case $arg in
+    --zsh)
+      USE_ZSH=true
+      ;;
+    --bash)
+      USE_BASH=true
+      ;;
+  esac
+done
+
+if $USE_ZSH; then
+  dapper_add_install zsh
+  rm -rf $BOOTSTRAP_DIR
+  exec $(which zsh)
+else
+  rm -rf $BOOTSTRAP_DIR
+  exec $(which bash)
+fi
