@@ -146,7 +146,8 @@ done
 
 if $USE_ZSH; then
   stow zsh
-  nexus_add_install zsh
+  _nexus_add zsh
+  _nexus_install
   rm -rf $BOOTSTRAP_DIR
   exec $(which zsh)
 else
