@@ -4,9 +4,9 @@
 ## bootstrap
 ### Bash
 ```sh
-curl -sS https://raw.githubusercontent.com/spreadprism/dotfiles/main/bootstrap.sh | bash
+curl -sS https://raw.githubusercontent.com/spreadprism/dotfiles/main/scripts/nexus.sh | bash
 ```
 ### Zsh
 ```sh
-curl -sS https://raw.githubusercontent.com/spreadprism/dotfiles/main/bootstrap.sh | bash -s -- --zsh
+curl -sS https://raw.githubusercontent.com/spreadprism/dotfiles/main/scripts/nexus.sh | bash -s -- --zsh
 ```
