@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 GIT_URL="https://github.com/spreadprism/dotfiles"
