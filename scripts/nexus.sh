@@ -82,7 +82,7 @@ _nexus_install() {
 _nexus_install_pm() {
   if [ ! -z $_DEPENDENCIES_PM ]; then
     case $_DISTRO in
-      $_DISTRO_ARCH
+      $_DISTRO_ARCH)
         sudo pacman -S --noconfirm --needed $_DEPENDENCIES_PM
         ;;
       $_DISTRO_DEBIAN|$_DISTRO_UBUNTU)
