@@ -325,17 +325,19 @@ __tmux_new_session () {
   echo $expected_number
 }
 
-if __interactive_shell && ! __inside_tmux; then
-  if __tmux_running; then
-    session_number=$(__tmux_session_to_attach)
-    if [[ -n $session_number ]]; then
-      exec tmux attach-session -t $session_number
+if __tmux_available; then
+  if __interactive_shell && ! __inside_tmux; then
+    if __tmux_running; then
+      session_number=$(__tmux_session_to_attach)
+      if [[ -n $session_number ]]; then
+        exec tmux attach-session -t $session_number
+      fi
+      session_number=$(__tmux_new_session)
+      echo $session_number
+      exec tmux new -s $session_number -c "$PWD"
+    else
+      tmux new-session -d -s base
+      exec tmux new -s 0 -c "$PWD"
     fi
-    session_number=$(__tmux_new_session)
-    echo $session_number
-    exec tmux new -s $session_number -c "$PWD"
-  else
-    tmux new-session -d -s base
-    exec tmux new -s 0 -c "$PWD"
   fi
 fi
