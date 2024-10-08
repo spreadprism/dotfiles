@@ -1,47 +1,51 @@
 #!/bin/bash
 
-_PLATFORM="" # INFO: Linux, MacOS, WSL
+GIT_URL="https://github.com/spreadprism/dotfiles"
+DOTFILE_DIR="$HOME/.dotfiles"
+BOOTSTRAP_DIR="$HOME/boot-tmp"
+
+NEXUS_PLATFORM="" # INFO: Linux, MacOS, WSL
 
 _PLATFORM_LINUX="Linux"
 _PLATFORM_MACOS="MacOS"
 _PLATFORM_WSL="WSL"
 
-_DISTRO=""
+NEXUS_DISTRO=""
 _DISTRO_ARCH="arch"
 _DISTRO_UBUNTU="ubuntu"
 _DISTRO_DEBIAN="debian"
 _DISTRO_RHEL="rhel"
 
-_PLATFORM=$(uname -sr)
+NEXUS_PLATFORM=$(uname -sr)
 _DEPENDENCIES_PM=""
 _DEPENDENCIES_LOCAL=""
-_DAPPER_BIN_DIR="$HOME/.bin"
+NEXUS_BIN_DIR="$HOME/.bin"
 export PATH="$PATH:$_DAPPER_BIN_DIR"
 
-case "${_PLATFORM}" in
+case "${NEXUS_PLATFORM}" in
   Darwin*)
-    _PLATFORM=$_PLATFORM_MACOS
+    NEXUS_PLATFORM=$_PLATFORM_MACOS
     # TODO: Support macos, if need be
-    echo "${_PLATFORM} is not supported"
+    echo "${NEXUS_PLATFORM} is not supported"
     exit 1
     ;;
   Linux*Microsoft*)
-    _PLATFORM=$_PLATFORM_WSL
+    NEXUS_PLATFORM=$_PLATFORM_WSL
     ;;
   Linux*)
-    _PLATFORM=$_PLATFORM_LINUX
+    NEXUS_PLATFORM=$_PLATFORM_LINUX
     ;;
   *)
-    echo "${_PLATFORM} is not supported"
+    echo "${NEXUS_PLATFORM} is not supported"
     exit 1
     ;;
 esac
 
-if [ "$_PLATFORM" = "$_PLATFORM_LINUX" ] || [ "$_PLATFORM" = "$_PLATFORM_WSL" ]; then
-  _DISTRO=$(cat /etc/*-release | grep -i '^ID=' | cut -d'=' -f2)
+if [ "$NEXUS_PLATFORM" = "$_PLATFORM_LINUX" ] || [ "$NEXUS_PLATFORM" = "$_PLATFORM_WSL" ]; then
+  NEXUS_DISTRO=$(cat /etc/*-release | grep -i '^ID=' | cut -d'=' -f2)
 fi
 
-dapper_add() {
+_nexus_add() {
   DEPENDENCY="$1"
   CMD="$1"
   shift
@@ -65,24 +69,20 @@ dapper_add() {
     fi
   fi
 }
-# dapper_add_git() {
-#
+
+# nexus_add_git() {
+# TODO: Complete function
 # }
 
-dapper_add_install() {
-  dapper_add $@
-  dapper_install
+_nexus_install() {
+  _nexus_install_pm
+  _nexus_install_git
 }
 
-dapper_install() {
-  _dapper_install_pm
-  _dapper_install_git
-}
-
-_dapper_install_pm() {
+_nexus_install_pm() {
   if [ ! -z $_DEPENDENCIES_PM ]; then
     case $_DISTRO in
-      $_DISTRO_ARCH)
+      $_DISTRO_ARCH
         sudo pacman -S --noconfirm --needed $_DEPENDENCIES_PM
         ;;
       $_DISTRO_DEBIAN|$_DISTRO_UBUNTU)
@@ -99,15 +99,15 @@ _dapper_install_pm() {
   fi
 }
 
-_dapper_install_git() {
+_nexus_install_git() {
   if [ ! -z $_DEPENDENCIES_PM ]; then
-    _dapper_ensure_eget_installed
+    _nexus_ensure_eget_installed
 
     # TODO: Install logic
   fi
 }
 
-_dapper_ensure_eget_installed() {
+_nexus_ensure_eget_installed() {
   EGET_PATH=$_DAPPER_BIN_DIR/eget
   if [ ! -f $EGET_PATH ]; then
     LAST_PWD=$PWD
@@ -116,3 +116,39 @@ _dapper_ensure_eget_installed() {
     cd $LAST_PWD
   fi
 }
+
+set -e
+
+_nexus_add git
+_nexus_add stow
+
+_nexus_install
+
+if [ ! -d $DOTFILE_DIR ]; then
+  git clone $GIT_URL $DOTFILE_DIR --recurse-submodules
+  clear
+fi
+
+cd $DOTFILE_DIR
+
+stow base
+stow shell
+
+USE_ZSH=false
+
+for arg in "$@"; do
+  case $arg in
+    --zsh)
+      USE_ZSH=true
+      ;;
+  esac
+done
+
+if $USE_ZSH; then
+  nexus_add_install zsh
+  rm -rf $BOOTSTRAP_DIR
+  exec $(which zsh)
+else
+  rm -rf $BOOTSTRAP_DIR
+  exec $(which bash)
+fi

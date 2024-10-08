@@ -3,3 +3,4 @@
 --dotfiles
 --adopt
 --ignore=profiles/base/dot-bin/.gitignore
+--no-folding
