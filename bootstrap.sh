@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 GIT_URL="https://github.com/spreadprism/dotfiles"
 DOTFILE_DIR="$HOME/.dotfiles"
