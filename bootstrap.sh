@@ -7,8 +7,7 @@ function source_util {
   if [ -d $DOTFILE_DIR ]; then
     source $DOTFILE_DIR/$1
   else
-    echo something
-    # TODO: source the repo version
+    source <(curl -s https://raw.githubusercontent.com/spreadprism/dotfiles/main/$1)
   fi
 }
 
