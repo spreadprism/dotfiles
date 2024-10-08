@@ -35,7 +35,7 @@ if [ "$_PLATFORM" = "$_PLATFORM_LINUX" ] || [ "$_PLATFORM" = "$_PLATFORM_WSL" ];
   _DISTRO=$(cat /etc/*-release | grep -i '^ID=' | cut -d'=' -f2)
 fi
 
-function dapper_add {
+dapper_add () {
   DEPENDENCY="$1"
   CMD="$1"
   shift
@@ -61,7 +61,7 @@ function dapper_add {
   fi
 }
 
-function dapper_install {
+dapper_install () {
 
   if [ ! -z $_DEPENDENCIES ]; then
     case $_DISTRO in

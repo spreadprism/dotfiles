@@ -3,7 +3,7 @@
 GIT_URL="https://github.com/spreadprism/dotfiles"
 DOTFILE_DIR="$HOME/.dotfiles"
 
-function source_util {
+source_util () {
   if [ -d $DOTFILE_DIR ]; then
     source $DOTFILE_DIR/$1
   else
