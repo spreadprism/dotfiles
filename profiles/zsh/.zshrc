@@ -15,50 +15,26 @@ if [ ! -f $EGET_PATH ]; then
   cd $LAST_PWD
   clear
 fi
-# ------------------------------------------------------------
-if ! command -v starship &> /dev/null; then
-  eget starship/starship --to=$BIN_DIR -a="starship-x86_64-unknown-linux-gnu.tar.gz"
-fi
-# ------------------------------------------------------------
-if ! command -v bob &> /dev/null; then
-  eget MordechaiHadad/bob --to=$BIN_DIR -a="bob-linux-x86_64.zip"
-fi
-# ------------------------------------------------------------
-if ! command -v rg &> /dev/null; then
-  eget BurntSushi/ripgrep --to=$BIN_DIR
-fi
-# ------------------------------------------------------------
-if ! command -v fzf &> /dev/null; then
-  eget junegunn/fzf --to=$BIN_DIR
-fi
-# ------------------------------------------------------------
-if ! command -v jq &> /dev/null; then
-  eget jqlang/jq --to=$BIN_DIR -a="jq-linux64"
-fi
-# ------------------------------------------------------------
-if ! command -v jqp &> /dev/null; then
-  eget noahgorstein/jqp --to=$BIN_DIR
-fi
-# ------------------------------------------------------------
-if ! command -v bat &> /dev/null; then
-  eget sharkdp/bat --to=$BIN_DIR -a="bat-v0.24.0-x86_64-unknown-linux-gnu.tar.gz"
-fi
-# ------------------------------------------------------------
-if ! command -v eza &> /dev/null; then
-  eget eza-community/eza --to=$BIN_DIR -a="eza_x86_64-unknown-linux-gnu.tar.gz"
-fi
-# ------------------------------------------------------------
-if ! command -v lazygit &> /dev/null; then
-  eget jesseduffield/lazygit --to=$BIN_DIR
-fi
-# ------------------------------------------------------------
-if ! command -v zoxide &> /dev/null; then
-  eget ajeetdsouza/zoxide --to=$BIN_DIR
-fi
-
-if ! command -v direnv &> /dev/null; then
-  eget direnv/direnv --to=$BIN_DIR
-fi
+ensure_installed() {
+  if ! command -v $1 &> /dev/null; then
+    if [ -n $3 ]; then
+      eget $2 -a=$3 --to=$BIN_DIR
+    else
+      eget $2 --to=$BIN_DIR
+    fi
+  fi
+}
+ensure_installed starship starship/starship "starship-x86_64-unknown-linux-gnu.tar.gz"
+ensure_installed bob MordechaiHadad/bob "bob-linux-x86_64.zip"
+ensure_installed rg BurntSushi/ripgrep
+ensure_installed fzf junegunn/fzf
+ensure_installed jq jqlang/jq "jq-linux64"
+ensure_installed jqp noahgorstein/jqp
+ensure_installed bat sharkdp/bat "bat-v0.24.0-x86_64-unknown-linux-gnu.tar.gz"
+ensure_installed eza eza-community/eza "eza_x86_64-unknown-linux-gnu.tar.gz"
+ensure_installed lazygit jesseduffield/lazygit
+ensure_installed zoxide ajeetdsouza/zoxide
+ensure_installed direnv direnv/direnv
 # ------------------------------------------------------------
 # INFO: Zinit
 # ------------------------------------------------------------
