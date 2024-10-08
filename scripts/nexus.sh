@@ -125,7 +125,7 @@ _nexus_add stow
 _nexus_install
 
 if [ ! -d $DOTFILE_DIR ]; then
-  git clone $GIT_URL $DOTFILE_DIR --recurse-submodules
+  git clone $GIT_URL $DOTFILE_DIR
   clear
 fi
 
@@ -145,10 +145,12 @@ for arg in "$@"; do
 done
 
 if $USE_ZSH; then
+  stow zsh
   nexus_add_install zsh
   rm -rf $BOOTSTRAP_DIR
   exec $(which zsh)
 else
+  stow bash
   rm -rf $BOOTSTRAP_DIR
   exec $(which bash)
 fi

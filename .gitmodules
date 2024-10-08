@@ -1,3 +1,3 @@
-[submodule "profiles/development/dot-config/nvim"]
-	path = profiles/development/dot-config/nvim
+[submodule "profiles/development/.config/nvim"]
+	path = profiles/development/.config/nvim
 	url = git@github.com:spreadprism/nvim.git
