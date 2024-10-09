@@ -118,6 +118,7 @@ _nexus_ensure_eget_installed() {
 
 set -e
 
+# BUG: Doesn't actually install it
 _nexus_add git
 _nexus_add stow
 
