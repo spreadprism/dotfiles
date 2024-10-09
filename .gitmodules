@@ -1,3 +1,0 @@
-[submodule "profiles/development/.config/nvim"]
-	path = profiles/development/.config/nvim
-	url = git@github.com:spreadprism/nvim.git
